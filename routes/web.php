@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\MachineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,6 +12,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MachineController@index');
+// Route::post('/search', 'MachineController@search');
+// Route::get('/search/{brand}', 'MachineController@brand');
+Route::get('/admin', [MachineController::class, 'admin'])->name('admin');
+Route::get('/search/{param}', [MachineController::class, 'param']);
+Route::post('/search', [MachineController::class, 'searching']);
