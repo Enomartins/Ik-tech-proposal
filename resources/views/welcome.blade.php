@@ -9,92 +9,194 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
 
+        <!-- CSS only -->
+        {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> --}}
+
+        <link rel="stylesheet" href="bootstrap.min.css">
+
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+            body{
+                margin: 0%;
+            }
+            .bg-top {
+                height: 70px;
+                background-image: url('/images/roommate.PNG')
             }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
+            .top{
+                /* margin: 0 10%; */
+                z-index: 5;
+                background-color: white;
                 position: relative;
+                top: 30px;
+                box-shadow: 2px;
+                padding: 1rem;
+                /* border-bottom: 1px black solid; */
+                border-radius: 5px;
+                box-shadow: 0 0 15px 0;
             }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
+            .top h2{
+                margin: 0.6em;
             }
 
-            .content {
-                text-align: center;
+            .search {
+                display: flex;
+                /* justify-content: space-between; */
             }
 
-            .title {
-                font-size: 84px;
+            .search select, .search form {
+                /* flex: 1; */
+                margin: 0 0.5em;
             }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
+            select{
+                flex: 1;
             }
+            form{
+                display: flex;
+                /* justify-content: space-between; */
+                flex: 5;
+            }  
 
-            .m-b-md {
-                margin-bottom: 30px;
+            form input{
+                flex: 1;
+                margin: 0 0.5em;
+                padding: 0.5em 2em;
+            }  
+            form .search{
+                flex: 4;
+                /* border: none; */
             }
+            form .orange {
+                /* background-color: orange; */
+                color: white;
+                font-weight: bold;
+                border: none;
+                border-radius: 5px;
+            }   
+            .category {
+                margin-top: 15%;                
+            }  
+            .popular {
+                background-color: grey;
+            } 
+            .footer {
+                position: fixed;
+                bottom: 0vh;
+            }
+            
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <div class="bg-top">
+            <div class="top container">
+                <h2>What Vehicle do you want to hire?</h2>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                <div class="search">
+                    
+                    <form action="/search" method="post">
+                        {{csrf_field()}}
+                        
+                        <select name="category" id="machine-category">
+                            <option value="">All Categories</option>
+                            @foreach ($categories as $item)
+        
+                            <option value='{{$item->category}}'>{{$item->category}}</option>
+                                
+                            @endforeach
+                        </select>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                        <input class="search" type="text" name="searchtext" id="" placeholder="Search for Vehicle">
+                        <input class="bg-primary orange" type="submit" value="Find Vehicle">
+                    </form>
                 </div>
             </div>
+            
         </div>
+
+        <div class="container">
+
+            <div class="wrap mx-5">
+
+
+                <div class="category">
+                    <h2>Categories</h2>
+                </div>
+                    
+                <div class="row mt-5">
+                
+                        @foreach ($categories as $item)
+        
+                            {{-- <option value='{{$item->category}}'>{{$item->category}}</option> --}}
+    
+                            <div class="col-sm-6 col-md-4 col-lg-3 my-3">
+                                <a href="/search/{{$item->category}}">
+
+                                    <div class="card" style="">
+                                        <img style="object-fit: cover; height:10rem" class="p-5 card-img-top w-100" src="/images/categories/{{$item->category}}.PNG" alt="" title="">
+        
+                                        <div class="card-body p-0 d-flex">
+                                            <h6 class="text-dark font-weight-bold text-uppercase card-title mx-auto my-3">{{$item->category}}</h6>
+                                            
+                                        </div>
+        
+                                    </div>
+                                
+                                </a>
+                            </div>
+                                
+                        @endforeach
+                </div>
+
+                
+
+            </div>
+        </div>
+
+        <div class="popular my-4 py-5">
+
+            <div class="container">
+
+                <div class="head">
+                    <h2 class="py-3">Popular</h2>
+                </div>
+
+                <div class="row mb-5">
+
+                    @foreach ($popular as $item)
+
+                    <div class="col-sm-6 col-md-3 mt-2">
+                        <div class="card" style="">
+                            <img style="object-fit: cover; height:10rem" class="card-img-top w-100" src="/images/roommate.PNG" alt="" title="">
+
+                            <div class="card-body p-0 d-flex">
+                                <h6 class="text-info font-weight-bold text-uppercase card-title mx-auto my-3">{{$item->name}}</h6>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                        
+                    @endforeach
+
+                    
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer d-flex bg-dark w-100">
+
+            <p class="font-weight-bold pt-3 mx-auto text-white">copyright&copy; 2021 - IK tech</p>
+
+        </div>
+
+        <!-- JavaScript Bundle with Popper -->
+        {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> --}}
+        {{-- <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
     </body>
 </html>
