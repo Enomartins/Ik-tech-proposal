@@ -27,13 +27,15 @@ class MachineController extends Controller
 
         $category = $request->category;
         $search = $request->searchtext;
+
+        $brand = DB::select('SELECT DISTINCT brand FROM machines');
+        $categories = DB::select('SELECT DISTINCT category FROM machines');
+        $popular = DB::select('SELECT * FROM machines WHERE tag = "popular"');
         
    // dd($search);
         if(!$category and !$search){
             $machines = Machine::all();
-            $brand = DB::select('SELECT DISTINCT brand FROM machines');
-            $categories = DB::select('SELECT DISTINCT category FROM machines');
-            $popular = DB::select('SELECT * FROM machines WHERE tag = "popular"');
+            
 
             // dd($popular);
 
@@ -44,7 +46,7 @@ class MachineController extends Controller
                 ->Where('name', 'LIKE', "%{$search}%")  
                 ->get();
 
-        return view('/search')->with(['machines' => $results]);
+        return view('/search')->with(['machines' => $results, 'brand' => $brand, 'categories' => $categories]);
         }
 
         elseif (!$search) {
@@ -53,7 +55,7 @@ class MachineController extends Controller
                 ->Where('category', '=', "$category") 
                 ->get();
 
-        return view('/search')->with(['machines' => $results, 'category' => $category]);
+        return view('/search')->with(['machines' => $results, 'brand' => $brand, 'categories' => $categories]);
         }
         
        else {
@@ -64,7 +66,7 @@ class MachineController extends Controller
         ->orWhere('name', 'LIKE', "%{$search}%")  
         ->get();
 
-return view('/search')->with(['machines' => $results, 'category' => $category]);
+        return view('/search')->with(['machines' => $results, 'brand' => $brand, 'categories' => $categories]);
        }
        
        

@@ -65,10 +65,7 @@
                 margin: 0 0.5em;
                 padding: 0.5em 2em;
             }  
-            form .search{
-                flex: 4;
-                /* border: none; */
-            }
+            
             form .orange {
                 /* background-color: orange; */
                 color: white;
@@ -96,10 +93,10 @@
 
                 <div class="search">
                     
-                    <form action="/search" method="post">
+                    <form action="/search" method="post" class="row">
                         {{csrf_field()}}
                         
-                        <select name="category" id="machine-category">
+                        <select class="col-md-3" name="category" id="machine-category">
                             <option value="">All Categories</option>
                             @foreach ($categories as $item)
         
@@ -108,8 +105,8 @@
                             @endforeach
                         </select>
 
-                        <input class="search" type="text" name="searchtext" id="" placeholder="Search for Vehicle">
-                        <input class="bg-warning orange" type="submit" value="Find Vehicle">
+                        <input class="search col-md-6" type="text" name="searchtext" id="" placeholder="Search for Vehicle">
+                        <input class="bg-warning orange col-md-2" type="submit" value="Find Vehicle">
                     </form>
                 </div>
             </div>

@@ -40,7 +40,7 @@
               {{-- <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label> --}}
               @foreach ($brand as $item)
                   
-                <a type="button" href="{{$item->brand}}" class="btn btn-warning btn-sm btn-block">{{$item->brand}}</a>
+                <a type="button" href="/search/{{$item->brand}}" class="btn btn-warning btn-sm btn-block">{{$item->brand}}</a>
             
 
               @endforeach
