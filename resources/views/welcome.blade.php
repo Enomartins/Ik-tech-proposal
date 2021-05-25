@@ -109,7 +109,7 @@
                         </select>
 
                         <input class="search" type="text" name="searchtext" id="" placeholder="Search for Vehicle">
-                        <input class="bg-primary orange" type="submit" value="Find Vehicle">
+                        <input class="bg-warning orange" type="submit" value="Find Vehicle">
                     </form>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                                         <img style="object-fit: cover; height:10rem" class="p-5 card-img-top w-100" src="/images/categories/{{$item->category}}.PNG" alt="" title="">
         
                                         <div class="card-body p-0 d-flex">
-                                            <h6 class="text-dark font-weight-bold text-uppercase card-title mx-auto my-3">{{$item->category}}</h6>
+                                            <h6 class="text-warning font-weight-bold text-uppercase card-title mx-auto my-3">{{$item->category}}</h6>
                                             
                                         </div>
         
@@ -160,7 +160,7 @@
             <div class="container">
 
                 <div class="head">
-                    <h2 class="py-3">Popular</h2>
+                    <h2 class="py-3 text-white">Popular</h2>
                 </div>
 
                 <div class="row mb-5">
@@ -172,7 +172,7 @@
                             <img style="object-fit: cover; height:10rem" class="card-img-top w-100" src="/images/roommate.PNG" alt="" title="">
 
                             <div class="card-body p-0 d-flex">
-                                <h6 class="text-info font-weight-bold text-uppercase card-title mx-auto my-3">{{$item->name}}</h6>
+                                <h6 class="text-dark font-weight-bold text-uppercase card-title mx-auto my-3">{{$item->name}}</h6>
                                 
                             </div>
 
@@ -190,7 +190,7 @@
 
         <div class="footer d-flex bg-dark w-100">
 
-            <p class="font-weight-bold pt-3 mx-auto text-white">copyright&copy; 2021 - IK tech</p>
+            <p class="font-weight-bold pt-3 mx-auto text-warning">copyright&copy; 2021 - IK tech</p>
 
         </div>
 
